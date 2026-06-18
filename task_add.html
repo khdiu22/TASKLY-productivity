@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Task{% endblock %}
+
+{% block content %}
+
+<h1>Add New Task</h1>
+
+<form method="POST">
+
+    <label>Title</label>
+    <input type="text" name="title" required>
+
+    <label>Description</label>
+    <textarea name="description" rows="4"></textarea>
+
+    <label>Priority</label>
+    <select name="priority" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+
+    <label>Due Date</label>
+    <input type="date" name="due_date">
+
+    <label>Status</label>
+    <select name="status" required>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Done">Done</option>
+    </select>
+
+    <label>Category</label>
+    <select name="category_id">
+        <option value="">No Category</option>
+
+        {% for category in categories %}
+            <option value="{{ category.id }}">
+                {{ category.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Add Task</button>
+
+</form>
+
+{% endblock %}

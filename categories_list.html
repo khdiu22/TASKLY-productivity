@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+
+<h1>Categories</h1>
+
+<!-- Add Category Form -->
+<form method="POST">
+
+    <label>Category Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Category Color:</label><br>
+    <input type="color" name="color" value="#2563eb"><br><br>
+
+    <button type="submit">Add Category</button>
+
+</form>
+
+<br><br>
+
+<!-- Categories Table -->
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Delete</th>
+    </tr>
+
+    {% for category in categories %}
+
+    <tr>
+
+        <td>{{ category.id }}</td>
+
+        <td>{{ category.name }}</td>
+
+        <td>
+            <span style="
+                background-color: {{ category.color }};
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+            ">
+                {{ category.color }}
+            </span>
+        </td>
+
+        <td>
+            <a href="{{ url_for('delete_category', category_id=category.id) }}"
+               onclick="return confirm('Are you sure you want to delete this category?')">
+                Delete
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

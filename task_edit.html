@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block content %}
+
+<h1>Edit Task</h1>
+
+<form method="POST">
+
+    <label>Title</label>
+    <input type="text" name="title" value="{{ task.title }}" required>
+
+    <label>Description</label>
+    <textarea name="description" rows="4">{{ task.description }}</textarea>
+
+    <label>Priority</label>
+    <select name="priority" required>
+        <option value="Low" {{ "selected" if task.priority == "Low" else "" }}>Low</option>
+        <option value="Medium" {{ "selected" if task.priority == "Medium" else "" }}>Medium</option>
+        <option value="High" {{ "selected" if task.priority == "High" else "" }}>High</option>
+    </select>
+
+    <label>Due Date</label>
+    <input type="date" name="due_date" value="{{ task.due_date }}">
+
+    <label>Status</label>
+    <select name="status" required>
+        <option value="Pending" {{ "selected" if task.status == "Pending" else "" }}>Pending</option>
+        <option value="In Progress" {{ "selected" if task.status == "In Progress" else "" }}>In Progress</option>
+        <option value="Done" {{ "selected" if task.status == "Done" else "" }}>Done</option>
+    </select>
+
+    <label>Category</label>
+    <select name="category_id">
+        <option value="">No Category</option>
+
+        {% for category in categories %}
+            <option value="{{ category.id }}" {{ "selected" if task.category_id == category.id else "" }}>
+                {{ category.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Update Task</button>
+
+</form>
+
+{% endblock %}
